@@ -15,7 +15,7 @@ const initialState: ProductsState = {
   error: null,
 };
 
-// Async thunk для завантаження товарів
+
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async () => {

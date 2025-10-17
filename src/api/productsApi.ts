@@ -1,8 +1,8 @@
 import type {ProductType} from '../types/ProductsTypes';
 
-// Імітація запиту з затримкою 200-300 мс
+
 export const fetchProductsFromAPI = async (): Promise<ProductType[]> => {
-  const delay = Math.floor(Math.random() * 100) + 200; // 200-300 мс
+  const delay = Math.floor(Math.random() * 100) + 300; // 200-300 мс
   
   await new Promise(resolve => setTimeout(resolve, delay));
   

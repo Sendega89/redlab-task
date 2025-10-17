@@ -1,35 +1,35 @@
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from './redux/hooks'
-import { fetchProducts } from './redux/slices/productsSlice'
-import type { ProductType } from './types/ProductsTypes'
-import ProductCard from './components/Cards/ProductCard/ProductCard'
+import { fetchUser } from './redux/slices/userSlice'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import './App.css'
+import AppRoutes from "./routes/AppRoutes.tsx";
 
 function App() {
   const dispatch = useAppDispatch()
-  const { products, loading, error } = useAppSelector((state) => state.products)
+  const { user } = useAppSelector((state) => state.user)
 
   useEffect(() => {
-    dispatch(fetchProducts())
+    dispatch(fetchUser())
   }, [dispatch])
-
-
-  if (loading) {
-    return <div className="app">Завантаження...</div>
-  }
-
-  if (error) {
-    return <div className="app">Помилка: {error}</div>
-  }
 
   return (
     <div className="app">
-      <h1>Каталог товарів</h1>
-      <div className="products-grid">
-        {products.map((product: ProductType) => (
-         <ProductCard card={product} key={product.id} />
-        ))}
-      </div>
+      <Header
+        onUserClick={() => console.log('Профіль натиснуто')}
+      />
+     <AppRoutes />
+      <Footer
+        contactInfo={user ? {
+          phone: user.phone,
+          email: user.email,
+          telegram: user.telegram,
+          linkedin: user.linkedin,
+          freelancehunt: user.freelancehunt
+        } : undefined}
+        onLogoClick={() => console.log('Логотип Footer натиснуто')}
+      />
     </div>
   )
 }
