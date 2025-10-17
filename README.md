@@ -1,73 +1,179 @@
-# React + TypeScript + Vite
+# 🛍️ ShopLab - React E-commerce Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Сучасний e-commerce додаток з каталогом товарів, пошуком та анімаціями.
 
-Currently, two official plugins are available:
+## 🚀 Запуск проекту
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+# Встановлення залежностей
+yarn install
 
-## React Compiler
+# Режим розробки
+yarn dev
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Білд для продакшну
+yarn build
 
-## Expanding the ESLint configuration
+# Попередній перегляд білду
+yarn preview
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# Запуск тестів
+yarn test
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+# Запуск тестів з UI
+yarn test:ui
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Coverage звіт
+yarn test:coverage
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Перевірка коду
+yarn lint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠 Стек технологій
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Core
+- **React 19.1** - UI бібліотека
+- **TypeScript 5.9** - типізація
+- **Vite 7** - збірка та dev сервер
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### State Management
+- **Redux Toolkit 2.9** - управління станом
+- **RTK Query** - кешування та синхронізація даних
+
+### Routing & Navigation
+- **React Router 7** - маршрутизація
+
+### Styling & Animation
+- **CSS Modules** - ізольовані стилі
+- **Framer Motion 12** - анімації
+
+### UI/UX
+- **Hugeicons** - іконки
+- **Custom Hooks** - переиспользуемая логіка
+
+### Utils
+- **use-debounce** - оптимізація пошуку
+- **Axios** - HTTP клієнт
+
+### Testing
+- **Vitest 3.2** - unit тести (Jest не брав, бо для Vite краще цей і не потрібно створювати конфігов,
+- так - ШІ то зараз робить швидко, але хочеться більш-менш чистий проект з можливістю тестування)
+- **Testing Library** - тестування компонентів
+- **jsdom** - DOM симуляція
+
+### Code Quality
+- **ESLint 9** - лінтинг (дефолт)
+- **Prettier** не ставив, бо я користуюсь WebStorm + я один пишу проект + мене він бісить іноді ;)
+- **TypeScript Strict Mode** - строга типізація
+
+## ✅ Що реалізовано
+
+### Основний функціонал
+- ✅ Головна сторінка з анімаціями та ефектами
+- ✅ Каталог товарів з фільтрацією
+- ✅ Пошук з debounce (500ms)
+- ✅ Фільтр по категоріям
+- ✅ Фільтр "Тільки обране"
+- ✅ Детальна сторінка товару
+- ✅ Додавання в обране (localStorage)
+- ✅ 404 сторінка
+- ✅ Responsive дизайн
+
+### Архітектура
+- ✅ Feature-Sliced Design структура
+- ✅ Path aliases (@/)
+- ✅ Error Boundary для помилок
+- ✅ RTK Query для API запитів
+- ✅ CSS Modules для ізоляції стилів
+- ✅ Custom hooks для логіки анімацій
+
+### UX/UI
+- ✅ Плавні анімації Framer Motion
+- ✅ Loader стани
+- ✅ Error стани з retry
+- ✅ Skeleton states (через анімації)
+- ✅ Hover ефекти
+- ✅ Accessibility (aria-labels, keyboard navigation)
+
+### Code Quality
+- ✅ TypeScript strict mode
+- ✅ ESLint конфігурація
+- ✅ 44 unit тести (utilities + hooks)
+- ✅ 100% покриття критичного коду
+- ✅ Без console.log в коді
+
+
+## ❌ Що не встигнув реалізувати
+- ❌ Backend API (використовується mock JSON, хотів підключити до свого бекенду,
+- але supabase мене послав і я вирішив не витрачати далі час)
+- ❌ Pagination для каталогу (було б гарно пагінацію, хоча на 12 товарів то не потрібно)
+- ❌ Фільти (було б гарно добити то всьо до норм магазину)
+- ❌ UserCabinet WishList (все то вже для проду залишив)
+- ❌ i18n (інтернаціоналізація, хотів зробити - часу мало, на всіх проектах використовую,
+- також додаю локаль до урла для SEO)
+
+# Масив favorites: string[] (ID товарів).
+- Бачив в задачі - зробив інакше, тому що люблю Query режим. І не люблю плодити зайві слайси.
+- В прод варіанті продукти приходитимуть з серверу і в обране додаємо з мутації одразу оновлюючи масив з хешу
+- не буде потреби в тому слайсі. Можна було мок сервер поставити, але - час.
+
+## ⏱ Час розробки (орієнтовно)
+
+| Етап | Час        |
+|------|------------|
+| **Налаштування проекту** | ~30 хв     |
+| **UI/UX дизайн та стилі** | ~1 год     |
+| **Головна сторінка** | ~1 год     | |
+| **Каталог товарів** | ~1 год     |
+| **Сторінка товару** | ~1 год     |
+| **Redux + API** | ~1 год     |
+| **Компоненти** | ~1 год     |
+| **Покращення та оптимізація** | ~1 год     | |
+| **Тестування та багфікси** | ~1 год     |
+| **ЗАГАЛОМ** | **~8 год** |
+
+## 📁 Структура проекту
+
 ```
+src/
+├── api/              # API запити
+├── common/           # Utilities, hooks
+│   ├── hooks/        # Custom hooks
+│   └── __tests__/    # Тести utilities
+├── components/       # React компоненти
+│   ├── Buttons/
+│   ├── Cards/
+│   ├── ErrorBoundary/
+│   ├── Header/
+│   ├── Footer/
+│   └── effects/      # Візуальні ефекти
+├── pages/            # Сторінки (routes)
+│   ├── Home/
+│   ├── Catalog/
+│   ├── ProductPage/
+│   └── ErrorPage/
+├── redux/            # State management
+│   ├── slices/       # Redux slices
+│   └── rtkApi/       # RTK Query API
+├── routes/           # Конфігурація роутів
+├── types/            # TypeScript типи
+└── test/             # Тестові setup файли
+```
+
+## 📝 Особливості реалізації
+
+- **RTK Query** для автоматичного кешування та рефетчу даних
+- **Path aliases** (@/) для чистих імпортів
+- **Error Boundary** для graceful degradation
+- **Custom hooks** для переиспользуемої логіки анімацій
+- **LocalStorage** для збереження обраного
+- **Debounce** для оптимізації пошуку
+- **CSS Modules** для уникнення конфліктів стилів
+- **TypeScript strict mode** для типобезпеки
+
+---
+
+**Розробник:** Ваше ім'я  
+**Дата:** 2025  
+**Версія:** 1.0.0

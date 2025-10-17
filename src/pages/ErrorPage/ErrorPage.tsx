@@ -1,17 +1,18 @@
 import React from 'react'
 import { HugeiconsIcon } from '@hugeicons/react'
-import {CatalogueIcon, Home01Icon} from '@hugeicons/core-free-icons'
-import CardButton from '../../components/Buttons/CardButton/CardButton'
+import { CatalogueIcon, Home01Icon } from '@hugeicons/core-free-icons'
+import CardButton from '@/components/Buttons/CardButton/CardButton'
 import styles from './ErrorPage.module.css'
-import {useNavigate} from "react-router";
+import { useNavigate } from 'react-router'
 
 
 const ErrorPage: React.FC = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    const onGo = (link:string) => {
-        navigate(`${link}`)
-    }
+  const onGo = (link: string) => {
+    navigate(link)
+  }
+  
   return (
     <div className={styles.errorPage}>
       <div className={styles.container}>
@@ -36,15 +37,15 @@ const ErrorPage: React.FC = () => {
             variant="warning"
             size="large"
             iconLeft={<HugeiconsIcon icon={Home01Icon} />}
-            onClick={()=>onGo('/')}
+            onClick={() => onGo('/')}
             className={styles.button}
           />
-            <CardButton
+          <CardButton
             text="До каталогу"
             variant="warning"
             size="large"
             iconLeft={<HugeiconsIcon icon={CatalogueIcon} />}
-            onClick={()=>onGo('/catalog')}
+            onClick={() => onGo('/catalog')}
             className={styles.button}
           />
         </div>

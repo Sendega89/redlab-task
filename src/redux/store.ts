@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './slices/userSlice';
-import searchReducer from './slices/searchSlice';
-import { productsApi } from './rtkApi/productsApi';
+import { configureStore } from '@reduxjs/toolkit'
+import userReducer from '@/redux/slices/userSlice'
+import searchReducer from '@/redux/slices/searchSlice'
+import { productsApi } from '@/redux/rtkApi/productsApi'
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +11,7 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(productsApi.middleware),
-});
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

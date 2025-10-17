@@ -3,12 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { FavouriteIcon, ShoppingCart02Icon, ArrowLeft01Icon } from '@hugeicons/core-free-icons'
-import { useProductByIdQuery, useToggleFavoriteMutation } from '../../redux/rtkApi/productsApi'
-import { useAnimationVariants } from '../../common/hooks/useAnimationVariants'
-import CardButton from '../../components/Buttons/CardButton/CardButton'
-import Loader from '../../components/Loader'
-import ErrorState from '../../components/ErrorState'
-import Spinner from '../../components/Spinner'
+import { useProductByIdQuery, useToggleFavoriteMutation } from '@/redux/rtkApi/productsApi'
+import { useAnimationVariants } from '@/common/hooks/useAnimationVariants'
+import CardButton from '@/components/Buttons/CardButton/CardButton'
+import Loader from '@/components/Loader'
+import ErrorState from '@/components/ErrorState'
+import Spinner from '@/components/Spinner'
 import styles from './ProductPage.module.css'
 
 const ProductPage: React.FC = () => {
@@ -35,8 +35,8 @@ const ProductPage: React.FC = () => {
   }
 
   const handleAddToCart = () => {
-    console.log('Додано в кошик:', product?.name)
-    // Тут буде логіка додавання в кошик
+    // TODO: Додати логіку додавання в кошик
+    // Можна додати toast notification або dispatch Redux action
   }
 
   const handleToggleFavorite = () => {

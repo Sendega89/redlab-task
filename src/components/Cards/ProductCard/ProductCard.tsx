@@ -1,12 +1,12 @@
 import React from 'react'
-import type { ProductType } from '../../../types/ProductsTypes'
-import { useToggleFavoriteMutation } from '../../../redux/rtkApi/productsApi'
-import CardButton from '../../Buttons/CardButton/CardButton'
-import Spinner from '../../Spinner'
+import type { ProductType } from '@/types/ProductsTypes'
+import { useToggleFavoriteMutation } from '@/redux/rtkApi/productsApi'
+import CardButton from '@/components/Buttons/CardButton/CardButton'
+import Spinner from '@/components/Spinner'
 import styles from './ProductCard.module.css'
-import { HugeiconsIcon} from "@hugeicons/react";
-import {FavouriteCircleIcon, FavouriteIcon, ShoppingCart02Icon} from "@hugeicons/core-free-icons";
-import {useNavigate} from "react-router";
+import { HugeiconsIcon } from '@hugeicons/react'
+import { FavouriteCircleIcon, FavouriteIcon, ShoppingCart02Icon } from '@hugeicons/core-free-icons'
+import { useNavigate } from 'react-router'
 
 
 
@@ -16,7 +16,7 @@ type Props = {
 }
 
 const ProductCard: React.FC<Props> = ({ card }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate()
   const [toggleFavorite, { isLoading: isFavoriteLoading }] = useToggleFavoriteMutation()
   const { id, name, price, category, isFavorite, img, description } = card
 
@@ -29,11 +29,12 @@ const ProductCard: React.FC<Props> = ({ card }) => {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    console.log('Додано в кошик:', name)
-    // Тут буде логіка додавання в кошик
+    // TODO: Додати логіку додавання в кошик
+    // Можна додати toast notification або dispatch Redux action
   }
+  
   const handleClickTitle = () => {
-      navigate(`/product/${card.name}/${card.id}`)
+    navigate(`/product/${card.name}/${card.id}`)
   }
   return (
     <div className={styles.card}>
@@ -43,22 +44,22 @@ const ProductCard: React.FC<Props> = ({ card }) => {
         aria-label={isFavorite ? 'Видалити з обраного' : 'Додати в обране'}
         disabled={isFavoriteLoading}
       >
-          {isFavoriteLoading ? (
-              <Spinner size="small" />
-          ) : isFavorite ? (
-              <HugeiconsIcon icon={FavouriteCircleIcon} />
-          ) : (
-              <HugeiconsIcon icon={FavouriteIcon}  aria-hidden="true" />
-          )}
+        {isFavoriteLoading ? (
+          <Spinner size="small" />
+        ) : isFavorite ? (
+          <HugeiconsIcon icon={FavouriteCircleIcon} />
+        ) : (
+          <HugeiconsIcon icon={FavouriteIcon} aria-hidden="true" />
+        )}
       </button>
-      <div className={styles.imageContainer} role={'button'} tabIndex={0} onClick={handleClickTitle}>
+      <div className={styles.imageContainer} role="button" tabIndex={0} onClick={handleClickTitle}>
         <img src={img} alt={name} className={styles.image} />
       </div>
 
       <div className={styles.content}>
         <span className={styles.badge}>New</span>
 
-        <div className={styles.info} role={'button'} tabIndex={0} onClick={handleClickTitle} >
+        <div className={styles.info} role="button" tabIndex={0} onClick={handleClickTitle}>
           <h3 className={styles.title}>{name}</h3>
           <p className={styles.category}>Категорія: {category}</p>
           {description && (

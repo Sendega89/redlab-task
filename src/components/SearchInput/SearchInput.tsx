@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useDebounce } from 'use-debounce'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Search01Icon } from '@hugeicons/core-free-icons'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { setSearchQuery } from '../../redux/slices/searchSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { setSearchQuery } from '@/redux/slices/searchSlice'
 import styles from './SearchInput.module.css'
 
 interface SearchInputProps {
