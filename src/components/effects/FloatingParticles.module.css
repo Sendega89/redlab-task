@@ -1,0 +1,19 @@
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #facc15;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #facc15;
+}
+

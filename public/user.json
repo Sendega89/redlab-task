@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "name": "Михайло Сендега",
+  "email": "sendega89@gmail.com",
+  "phone": "+380 (95) 339-59-77",
+  "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop",
+  "isAuthenticated": true,
+  "telegram": "@sendMikhailo",
+  "linkedin": "https://www.linkedin.com/in/sendega-mykhailo/",
+  "freelancehunt": "https://freelancehunt.com/my/portfolio"
+}
+
