@@ -1,89 +1,167 @@
 import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { FavouriteIcon, ShoppingCart02Icon, ArrowLeft01Icon } from '@hugeicons/core-free-icons'
+import { useProductByIdQuery, useToggleFavoriteMutation } from '../../redux/rtkApi/productsApi'
+import { useAnimationVariants } from '../../common/hooks/useAnimationVariants'
 import CardButton from '../../components/Buttons/CardButton/CardButton'
-import type { ProductType } from '../../types/ProductsTypes'
+import Loader from '../../components/Loader'
+import ErrorState from '../../components/ErrorState'
+import Spinner from '../../components/Spinner'
 import styles from './ProductPage.module.css'
 
-interface ProductPageProps {
-  product?: ProductType
-  onBack?: () => void
-  onAddToCart?: () => void
-  onToggleFavorite?: () => void
-}
+const ProductPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>()
+  const navigate = useNavigate()
+  
+  // RTK Query - автоматически загружает данные
+  const { data: product, isLoading, error } = useProductByIdQuery(Number(id) || 0, {
+    skip: !id, // Пропустить запрос если нет ID
+  })
+  
+  const [toggleFavorite, { isLoading: isFavoriteLoading }] = useToggleFavoriteMutation()
+  
+  // Animation variants
+  const { containerVariants, itemVariants, scaleInVariants } = useAnimationVariants({
+    delayChildren: 0.2,
+    staggerChildren: 0.15,
+    itemY: 30,
+    damping: 15
+  })
 
-const ProductPage: React.FC<ProductPageProps> = ({
-  product,
-  onBack,
-  onAddToCart,
-  onToggleFavorite
-}) => {
-  // Mock data для демонстрации
-  const mockProduct: ProductType = {
-    id: 1,
-    name: 'Ноутбук ASUS ROG',
-    description: 'Потужний ігровий ноутбук з RTX 4060. Ідеально підходить для гравців та професіоналів. Висока продуктивність, чудовий дисплей та надійна система охолодження забезпечують комфортну роботу навіть у найскладніших задачах.',
-    price: 45000,
-    category: 'electronics',
-    img: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800&h=600&fit=crop',
-    isFavorite: false,
+  const handleBack = () => {
+    navigate('/catalog')
   }
 
-  const currentProduct = product || mockProduct
+  const handleAddToCart = () => {
+    console.log('Додано в кошик:', product?.name)
+    // Тут буде логіка додавання в кошик
+  }
+
+  const handleToggleFavorite = () => {
+    if (product && !isFavoriteLoading) {
+      toggleFavorite(product.id)
+    }
+  }
+
+  if (isLoading) {
+    return <Loader fullscreen text="Завантаження товару..." />
+  }
+
+  if (error || !product) {
+    return (
+      <ErrorState>
+        <CardButton
+          text="Повернутися до каталогу"
+          variant="warning"
+          size="medium"
+          onClick={handleBack}
+        />
+      </ErrorState>
+    )
+  }
+
+  const currentProduct = product
 
   return (
-    <div className={styles.productPage}>
+    <motion.div 
+      className={styles.productPage}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
       <div className={styles.container}>
         {/* Back Button */}
-        <button className={styles.backButton} onClick={onBack}>
+        <motion.button 
+          className={styles.backButton} 
+          onClick={handleBack}
+          variants={itemVariants}
+          whileHover={{ x: -5 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <HugeiconsIcon icon={ArrowLeft01Icon} />
           <span>Повернутися до каталогу</span>
-        </button>
+        </motion.button>
 
         {/* Product Content */}
         <div className={styles.content}>
           {/* Left Side - Image */}
-          <div className={styles.imageSection}>
-            <div className={styles.imageContainer}>
+          <motion.div 
+            className={styles.imageSection}
+            variants={scaleInVariants}
+          >
+            <motion.div 
+              className={styles.imageContainer}
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               <img 
                 src={currentProduct.img} 
                 alt={currentProduct.name}
                 className={styles.image}
               />
-            </div>
+            </motion.div>
             
             {/* Image Thumbnails (можно добавить позже) */}
-            <div className={styles.thumbnails}>
-              <div className={styles.thumbnail}>
+            <motion.div 
+              className={styles.thumbnails}
+              variants={itemVariants}
+            >
+              <motion.div 
+                className={styles.thumbnail}
+                whileHover={{ scale: 1.1, borderColor: '#facc15' }}
+              >
                 <img src={currentProduct.img} alt="Thumbnail 1" />
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Side - Details */}
-          <div className={styles.detailsSection}>
+          <motion.div 
+            className={styles.detailsSection}
+            variants={containerVariants}
+          >
             {/* Category Badge */}
-            <div className={styles.categoryBadge}>
+            <motion.div 
+              className={styles.categoryBadge}
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+            >
               {currentProduct.category}
-            </div>
+            </motion.div>
 
             {/* Title */}
-            <h1 className={styles.title}>{currentProduct.name}</h1>
+            <motion.h1 
+              className={styles.title}
+              variants={itemVariants}
+            >
+              {currentProduct.name}
+            </motion.h1>
 
             {/* Price */}
-            <div className={styles.priceSection}>
+            <motion.div 
+              className={styles.priceSection}
+              variants={itemVariants}
+            >
               <span className={styles.price}>{currentProduct.price} ₴</span>
               <span className={styles.priceLabel}>Ціна</span>
-            </div>
+            </motion.div>
 
             {/* Description */}
-            <div className={styles.descriptionSection}>
+            <motion.div 
+              className={styles.descriptionSection}
+              variants={itemVariants}
+            >
               <h2 className={styles.descriptionTitle}>Опис товару</h2>
               <p className={styles.description}>{currentProduct.description}</p>
-            </div>
+            </motion.div>
 
             {/* Product Info */}
-            <div className={styles.infoSection}>
+            <motion.div 
+              className={styles.infoSection}
+              variants={itemVariants}
+            >
               <h2 className={styles.infoTitle}>Характеристики</h2>
               <div className={styles.infoList}>
                 <div className={styles.infoItem}>
@@ -103,59 +181,84 @@ const ProductPage: React.FC<ProductPageProps> = ({
                   <span className={styles.infoValue}>12 місяців</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Actions */}
-            <div className={styles.actions}>
-              <CardButton
-                text="Додати в кошик"
-                variant="warning"
-                size="large"
-                fullWidth
-                iconLeft={<HugeiconsIcon icon={ShoppingCart02Icon} />}
-                onClick={onAddToCart}
-              />
-              
-              <button 
-                className={styles.favoriteButton}
-                onClick={onToggleFavorite}
+            <motion.div 
+              className={styles.actions}
+              variants={itemVariants}
+            >
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <HugeiconsIcon 
-                  icon={FavouriteIcon} 
-                  className={currentProduct.isFavorite ? styles.favoriteActive : ''}
+                <CardButton
+                  text="Додати в кошик"
+                  variant="warning"
+                  size="large"
+                  fullWidth
+                  iconLeft={<HugeiconsIcon icon={ShoppingCart02Icon} />}
+                  onClick={handleAddToCart}
                 />
-                <span>{currentProduct.isFavorite ? 'У обраному' : 'Додати в обране'}</span>
-              </button>
-            </div>
+              </motion.div>
+              
+              <motion.button 
+                className={styles.favoriteButton}
+                onClick={handleToggleFavorite}
+                disabled={isFavoriteLoading}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {isFavoriteLoading ? (
+                  <Spinner size="small" />
+                ) : (
+                  <HugeiconsIcon 
+                    icon={FavouriteIcon} 
+                    className={currentProduct.isFavorite ? styles.favoriteActive : ''}
+                  />
+                )}
+                <span>
+                  {isFavoriteLoading 
+                    ? 'Оновлення...' 
+                    : currentProduct.isFavorite 
+                      ? 'У обраному' 
+                      : 'Додати в обране'
+                  }
+                </span>
+              </motion.button>
+            </motion.div>
 
             {/* Additional Info */}
-            <div className={styles.additionalInfo}>
-              <div className={styles.infoCard}>
-                <span className={styles.infoCardIcon}>🚚</span>
-                <div>
-                  <strong>Безкоштовна доставка</strong>
-                  <p>При замовленні від 1000 ₴</p>
-                </div>
-              </div>
-              <div className={styles.infoCard}>
-                <span className={styles.infoCardIcon}>↩️</span>
-                <div>
-                  <strong>Повернення 14 днів</strong>
-                  <p>Гарантія повернення коштів</p>
-                </div>
-              </div>
-              <div className={styles.infoCard}>
-                <span className={styles.infoCardIcon}>✓</span>
-                <div>
-                  <strong>Оригінальна продукція</strong>
-                  <p>Гарантія якості від виробника</p>
-                </div>
-              </div>
-            </div>
-          </div>
+            <motion.div 
+              className={styles.additionalInfo}
+              variants={itemVariants}
+            >
+              {[
+                { icon: '🚚', title: 'Безкоштовна доставка', text: 'При замовленні від 1000 ₴' },
+                { icon: '↩️', title: 'Повернення 14 днів', text: 'Гарантія повернення коштів' },
+                { icon: '✓', title: 'Оригінальна продукція', text: 'Гарантія якості від виробника' }
+              ].map((info, index) => (
+                <motion.div 
+                  key={index}
+                  className={styles.infoCard}
+                  whileHover={{ 
+                    scale: 1.03,
+                    boxShadow: '0 4px 12px rgba(250, 204, 21, 0.2)'
+                  }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <span className={styles.infoCardIcon}>{info.icon}</span>
+                  <div>
+                    <strong>{info.title}</strong>
+                    <p>{info.text}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

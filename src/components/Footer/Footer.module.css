@@ -21,52 +21,6 @@
   gap: 16px;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: transform 0.2s ease;
-}
-
-.logo:hover {
-  transform: scale(1.05);
-}
-
-.logoIcon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, #facc15 0%, #f59e0b 100%);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 28px;
-  box-shadow: 0 4px 6px rgba(250, 204, 21, 0.3);
-}
-
-.logoText {
-  font-size: 1.75rem;
-  font-weight: 700;
-  display: flex;
-  gap: 2px;
-}
-
-.logoMain {
-  color: #f9fafb;
-}
-
-.logoAccent {
-  background: linear-gradient(135deg, #facc15 0%, #f59e0b 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 .copyright {
   font-size: 0.875rem;
   color: #9ca3af;
@@ -105,16 +59,6 @@
     gap: 40px;
   }
 
-  .logoIcon {
-    width: 44px;
-    height: 44px;
-    font-size: 26px;
-  }
-
-  .logoText {
-    font-size: 1.5rem;
-  }
-
   .rightSection {
     width: 100%;
   }
@@ -127,16 +71,6 @@
 
   .container {
     gap: 32px;
-  }
-
-  .logoIcon {
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
-  }
-
-  .logoText {
-    font-size: 1.35rem;
   }
 
   .contactTitle {

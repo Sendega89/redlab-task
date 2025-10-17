@@ -1,42 +1,27 @@
-import {motion, type Variants} from 'framer-motion'
+import {motion} from 'framer-motion'
 import {HugeiconsIcon} from '@hugeicons/react'
 import {ArrowRight01Icon, Target03Icon, Rocket01Icon, Stairs01Icon} from '@hugeicons/core-free-icons'
 import CardButton from '../../components/Buttons/CardButton/CardButton'
 import {BackgroundOrbs, FloatingParticles, AnimatedLogo} from '../../components/effects'
+import {useAnimationVariants} from '../../common/hooks/useAnimationVariants'
 import styles from './Home.module.css'
 import {useNavigate} from "react-router";
 
 
 const Home = () => {
-
     const navigate = useNavigate()
 
     const onNavigateToCatalog = () => {
         navigate('/catalog')
     }
+    
     // Animation variants
-    const containerVariants: Variants = {
-        hidden: {opacity: 0},
-        visible: {
-            opacity: 1,
-            transition: {
-                delayChildren: 0.3,
-                staggerChildren: 0.2
-            }
-        }
-    }
-    const itemVariants: Variants = {
-        hidden: {y: 50, opacity: 0},
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                type: "spring",
-                damping: 12,
-                stiffness: 100
-            }
-        }
-    }
+    const { containerVariants, itemVariants } = useAnimationVariants({
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+        itemY: 50,
+        damping: 12
+    })
 
     return (
         <div className={styles.home}>

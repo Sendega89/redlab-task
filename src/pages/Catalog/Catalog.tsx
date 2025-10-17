@@ -1,23 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { fetchProducts } from '../../redux/slices/productsSlice'
+import { useProductsListQuery } from '../../redux/rtkApi/productsApi'
 import { clearSearch } from '../../redux/slices/searchSlice'
 import type { ProductType } from '../../types/ProductsTypes'
 import ProductCard from '../../components/Cards/ProductCard/ProductCard'
 import Loader from '../../components/Loader'
+import ErrorState from '../../components/ErrorState'
+import CardButton from '../../components/Buttons/CardButton/CardButton'
 import styles from './Catalog.module.css'
 
 const Catalog = () => {
   const dispatch = useAppDispatch()
-  const { products, loading, error } = useAppSelector((state) => state.products)
+  
+  // RTK Query - автоматически загружает данные
+  const { data: products = [], isLoading, error, refetch } = useProductsListQuery()
+  
   const searchQuery = useAppSelector((state) => state.search.query)
   
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false)
-
-  useEffect(() => {
-    dispatch(fetchProducts())
-  }, [dispatch])
 
   // Получаем уникальные категории
   const categories = ['all', ...new Set(products.map(product => product.category))]
@@ -32,24 +33,20 @@ const Catalog = () => {
     return matchesSearch && matchesCategory && matchesFavorites
   })
 
-  if (loading) {
+  if (isLoading) {
     return <Loader fullscreen text="Завантаження каталогу..." />
   }
 
   if (error) {
     return (
-      <div className={styles.errorContainer}>
-        <div className={styles.errorContent}>
-          <h2>❌ Помилка</h2>
-          <p>{error}</p>
-          <button 
-            className={styles.retryButton}
-            onClick={() => dispatch(fetchProducts())}
-          >
-            Спробувати ще раз
-          </button>
-        </div>
-      </div>
+      <ErrorState fullscreen>
+        <CardButton
+          text="Спробувати ще раз"
+          variant="warning"
+          size="medium"
+          onClick={() => refetch()}
+        />
+      </ErrorState>
     )
   }
 

@@ -1,11 +1,12 @@
 import React from 'react'
 import type { ProductType } from '../../../types/ProductsTypes'
-import { useAppDispatch } from '../../../redux/hooks'
-import { toggleFavorite } from '../../../redux/slices/productsSlice'
+import { useToggleFavoriteMutation } from '../../../redux/rtkApi/productsApi'
 import CardButton from '../../Buttons/CardButton/CardButton'
+import Spinner from '../../Spinner'
 import styles from './ProductCard.module.css'
 import { HugeiconsIcon} from "@hugeicons/react";
 import {FavouriteCircleIcon, FavouriteIcon, ShoppingCart02Icon} from "@hugeicons/core-free-icons";
+import {useNavigate} from "react-router";
 
 
 
@@ -15,13 +16,14 @@ type Props = {
 }
 
 const ProductCard: React.FC<Props> = ({ card }) => {
-  const dispatch = useAppDispatch()
+    const navigate = useNavigate();
+  const [toggleFavorite, { isLoading: isFavoriteLoading }] = useToggleFavoriteMutation()
   const { id, name, price, category, isFavorite, img, description } = card
 
   const handleToggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    dispatch(toggleFavorite(id))
+    toggleFavorite(id)
   }
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -30,31 +32,33 @@ const ProductCard: React.FC<Props> = ({ card }) => {
     console.log('Додано в кошик:', name)
     // Тут буде логіка додавання в кошик
   }
-
+  const handleClickTitle = () => {
+      navigate(`/product/${card.name}/${card.id}`)
+  }
   return (
     <div className={styles.card}>
       <button
         className={styles.favoriteButton}
         onClick={handleToggleFavorite}
         aria-label={isFavorite ? 'Видалити з обраного' : 'Додати в обране'}
+        disabled={isFavoriteLoading}
       >
-
-          {isFavorite ? (
-
+          {isFavoriteLoading ? (
+              <Spinner size="small" />
+          ) : isFavorite ? (
               <HugeiconsIcon icon={FavouriteCircleIcon} />
           ) : (
               <HugeiconsIcon icon={FavouriteIcon}  aria-hidden="true" />
           )}
       </button>
-
-      <div className={styles.imageContainer}>
+      <div className={styles.imageContainer} role={'button'} tabIndex={0} onClick={handleClickTitle}>
         <img src={img} alt={name} className={styles.image} />
       </div>
 
       <div className={styles.content}>
         <span className={styles.badge}>New</span>
 
-        <div className={styles.info}>
+        <div className={styles.info} role={'button'} tabIndex={0} onClick={handleClickTitle} >
           <h3 className={styles.title}>{name}</h3>
           <p className={styles.category}>Категорія: {category}</p>
           {description && (

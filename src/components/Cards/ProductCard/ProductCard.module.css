@@ -1,12 +1,14 @@
 .card {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   border-radius: 16px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
   cursor: pointer;
   background: white;
+  height: 100%;
 }
 
 .card:hover {
@@ -31,9 +33,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.favoriteButton:hover {
+.favoriteButton:hover:not(:disabled) {
   transform: scale(1.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.favoriteButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
 }
 
 .favoriteIcon {
@@ -78,8 +85,7 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 208px;
+  flex: 1;
 }
 
 .badge {
@@ -95,6 +101,7 @@
 
 .info {
   margin-top: 16px;
+
 }
 
 .title {
@@ -106,10 +113,10 @@
 }
 
 .price {
-  margin-top: 6px;
-  font-size: 0.875rem;
-  color: #374151;
-  font-weight: 600;
+  margin-top: 8px;
+  font-size: 1.25rem;
+  color: #f59e0b;
+  font-weight: 700;
 }
 
 .category {
@@ -134,8 +141,11 @@
   border-radius: 8px;
   border-left: 3px solid #facc15;
   font-style: italic;
+  min-height: 96px;
+  max-height: 96px;
 }
 
 .buttonContainer {
-  margin-top: 16px;
+  margin-top: auto;
+  padding-top: 16px;
 }

@@ -31,13 +31,15 @@
 
 /* Variants */
 .primary {
-  background-color:#facc15;
-  color: black;
+  background-color: #facc15;
+  color: #111827;
   border: none;
 }
 
 .primary:hover:not(:disabled) {
-  color: #4a4a4a;
+  background-color: #fbbf24;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(250, 204, 21, 0.3);
 }
 
 .secondary {

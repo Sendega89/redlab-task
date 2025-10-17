@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from './redux/hooks'
 import { fetchUser } from './redux/slices/userSlice'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import { ScrollToTop } from './common'
 import './App.css'
 import AppRoutes from "./routes/AppRoutes.tsx";
 
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <div className="app">
+      <ScrollToTop />
       <Header
         onUserClick={() => console.log('Профіль натиснуто')}
       />
@@ -28,7 +30,6 @@ function App() {
           linkedin: user.linkedin,
           freelancehunt: user.freelancehunt
         } : undefined}
-        onLogoClick={() => console.log('Логотип Footer натиснуто')}
       />
     </div>
   )

@@ -9,10 +9,9 @@ import Home from "../pages/Home";
 const AppRoutes: React.FC = () => {
     return (
         <Routes>
-
             <Route path="/" element={<Home />} />
             <Route path="/catalog" element={<Catalog />} />
-            <Route path="/product:id" element={<ProductPage />} />
+            <Route path="/product/:name/:id" element={<ProductPage />} />
             <Route path="*" element={<ErrorPage />} />
         </Routes>
     );

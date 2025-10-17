@@ -1,7 +1,8 @@
 import React from 'react'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { ShoppingBasket01Icon, Mail01Icon, Linkedin01Icon, CallIcon, TelegramIcon } from '@hugeicons/core-free-icons'
+import { Mail01Icon, Linkedin01Icon, CallIcon, TelegramIcon } from '@hugeicons/core-free-icons'
 import SocialLink from './SocialLink'
+import Logo from '../Logo'
 import styles from './Footer.module.css'
 
 export interface ContactInfo {
@@ -14,12 +15,11 @@ export interface ContactInfo {
 
 interface FooterProps {
   contactInfo?: ContactInfo
-  onLogoClick?: () => void
 }
 
 const Footer: React.FC<FooterProps> = ({
   contactInfo,
-  onLogoClick
+
 }) => {
   const currentYear = new Date().getFullYear()
 
@@ -55,19 +55,7 @@ const Footer: React.FC<FooterProps> = ({
       <div className={styles.container}>
         {/* Left Section - Logo */}
         <div className={styles.leftSection}>
-          <button 
-            className={styles.logo}
-            onClick={onLogoClick}
-            aria-label="На головну"
-          >
-            <div className={styles.logoIcon}>
-              <HugeiconsIcon icon={ShoppingBasket01Icon} />
-            </div>
-            <span className={styles.logoText}>
-              <span className={styles.logoMain}>Shop</span>
-              <span className={styles.logoAccent}>Lab</span>
-            </span>
-          </button>
+          <Logo variant="footer" />
           <p className={styles.copyright}>
             © {currentYear} ShopLab. Всі права захищено.
           </p>

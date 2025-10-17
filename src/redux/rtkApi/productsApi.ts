@@ -1,27 +1,42 @@
-import {createApi} from '@reduxjs/toolkit/query/react';
-import {userApi} from '../../api/api.ts';
-import {customAxiosBaseQuery} from '../../api/customAxiosBaseQuery.ts';
-import type {ProductType} from "../../types/ProductsTypes.ts";
-
-
+import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
+import { fetchProductsFromAPI, fetchOneProductFromAPI, toggleFavoriteAPI } from '../../api/productsApi';
+import { createApiErrorHandler } from '../../common/apiHelpers';
+import type { ProductType } from '../../types/ProductsTypes';
 
 export const productsApi = createApi({
 	reducerPath: 'productsApi',
-	baseQuery: customAxiosBaseQuery,
-	tagTypes: [
-		'productsList',
-	],
+	baseQuery: fakeBaseQuery(),
+	tagTypes: ['ProductsList', 'Product'],
 	endpoints: (builder) => ({
 		productsList: builder.query<ProductType[], void>({
-			query: () => ({
-				func: userApi.getProductsList,
-				args: [],
-			}),
-			providesTags: ['productsList'],
+			queryFn: createApiErrorHandler(
+				() => fetchProductsFromAPI(),
+				'Помилка завантаження товарів'
+			),
+			providesTags: ['ProductsList'],
+		}),
+		productById: builder.query<ProductType, number>({
+			queryFn: (id) => createApiErrorHandler(
+				() => fetchOneProductFromAPI(id),
+				'Помилка завантаження товару'
+			)(),
+			providesTags: (_, __, id) => [{ type: 'Product', id }],
+		}),
+		toggleFavorite: builder.mutation<ProductType, number>({
+			queryFn: (id) => createApiErrorHandler(
+				() => toggleFavoriteAPI(id),
+				'Помилка оновлення товару'
+			)(),
+			invalidatesTags: (_, __, id) => [
+				'ProductsList',
+				{ type: 'Product', id }
+			],
 		}),
 	}),
 });
 
-export const {useProductsListQuery
-
+export const {
+	useProductsListQuery,
+	useProductByIdQuery,
+	useToggleFavoriteMutation,
 } = productsApi;

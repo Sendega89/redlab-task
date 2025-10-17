@@ -188,56 +188,6 @@
   box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3);
 }
 
-/* Error State */
-.errorContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 40px 20px;
-  background: #f9fafb;
-}
-
-.errorContent {
-  text-align: center;
-  background: white;
-  padding: 48px;
-  border-radius: 16px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-}
-
-.errorContent h2 {
-  font-size: 1.75rem;
-  margin: 0 0 16px 0;
-  color: #ef4444;
-}
-
-.errorContent p {
-  font-size: 1rem;
-  color: #6b7280;
-  margin: 0 0 24px 0;
-}
-
-.retryButton {
-  padding: 12px 28px;
-  background: #facc15;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #111827;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: inherit;
-}
-
-.retryButton:hover {
-  background: #fbbf24;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3);
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .catalog {
