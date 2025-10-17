@@ -1,0 +1,116 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* Logo Icon */
+.logoIcon {
+  background: linear-gradient(135deg, #facc15 0%, #f59e0b 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 6px rgba(250, 204, 21, 0.3);
+}
+
+/* Header variant */
+.header .logoIcon {
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+}
+
+/* Footer variant */
+.footer .logoIcon {
+  width: 48px;
+  height: 48px;
+  font-size: 28px;
+  border-radius: 12px;
+}
+
+/* Logo Text */
+.logoText {
+  font-weight: 700;
+  display: flex;
+  gap: 2px;
+}
+
+.header .logoText {
+  font-size: 1.5rem;
+}
+
+.footer .logoText {
+  font-size: 1.75rem;
+}
+
+.header .logoMain {
+  color: #111827;
+}
+
+.footer .logoMain {
+  color: #f9fafb;
+}
+
+.logoAccent {
+  background: linear-gradient(135deg, #facc15 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header .logoText {
+    font-size: 1.25rem;
+  }
+
+  .header .logoIcon {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .footer .logoIcon {
+    width: 44px;
+    height: 44px;
+    font-size: 26px;
+  }
+
+  .footer .logoText {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header .logoText {
+    font-size: 1.1rem;
+  }
+
+  .header .logoIcon {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .footer .logoIcon {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .footer .logoText {
+    font-size: 1.35rem;
+  }
+}
+
