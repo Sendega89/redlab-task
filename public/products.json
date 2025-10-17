@@ -1,0 +1,111 @@
+[
+  {
+    "id": 1,
+    "name": "Ноутбук ASUS ROG",
+    "description": "Потужний ігровий ноутбук з RTX 4060",
+    "price": 45000,
+    "category": "electronics",
+    "img": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=400&h=300&fit=crop",
+    "isFavorite": false
+  },
+  {
+    "id": 2,
+    "name": "iPhone 15 Pro",
+    "description": "Флагманський смартфон Apple",
+    "price": 38000,
+    "category": "electronics",
+    "img": "https://images.unsplash.com/photo-1678652197831-2d180705cd2c?w=400&h=300&fit=crop",
+    "isFavorite": false
+  },
+  {
+    "id": 3,
+    "name": "Навушники Sony WH-1000XM5",
+    "description": "Бездротові навушники з шумозаглушенням",
+    "price": 12000,
+    "category": "electronics",
+    "img": "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&h=300&fit=crop",
+    "isFavorite": false
+  },
+  {
+    "id": 4,
+    "name": "Механічна клавіатура Keychron K8",
+    "description": "RGB підсвітка, перемикачі Cherry MX",
+    "price": 3500,
+    "category": "electronics",
+    "img": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=300&fit=crop",
+    "isFavorite": false
+  },
+  {
+    "id": 5,
+    "name": "Книга 'Чистий код'",
+    "description": "Роберт Мартін - класика програмування",
+    "price": 650,
+    "category": "books",
+    "img": "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=300&fit=crop",
+    "isFavorite": false
+  },
+  {
+    "id": 6,
+    "name": "Книга 'JavaScript: The Good Parts'",
+    "description": "Даглас Крокфорд про JavaScript",
+    "price": 580,
+    "category": "books",
+    "img": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=300&fit=crop",
+    "isFavorite": false
+  },
+  {
+    "id": 7,
+    "name": "Книга 'Алгоритми. Вступ'",
+    "description": "Кормен, Лейзерсон, Рівест, Стайн",
+    "price": 890,
+    "category": "books",
+    "img": "https://images.unsplash.com/photo-1589998059171-988d887df646?w=400&h=300&fit=crop",
+    "isFavorite": false
+  },
+  {
+    "id": 8,
+    "name": "Книга 'React у дії'",
+    "description": "Повний гід по React та екосистемі",
+    "price": 720,
+    "category": "books",
+    "img": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=300&fit=crop",
+    "isFavorite": false
+  },
+  {
+    "id": 9,
+    "name": "Футболка 'Developer Mode'",
+    "description": "100% бавовна, чорний колір",
+    "price": 450,
+    "category": "clothing",
+    "img": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop",
+    "isFavorite": false
+  },
+  {
+    "id": 10,
+    "name": "Худі 'Code & Coffee'",
+    "description": "Тепле худі для програмістів",
+    "price": 890,
+    "category": "clothing",
+    "img": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=300&fit=crop",
+    "isFavorite": false
+  },
+  {
+    "id": 11,
+    "name": "Кепка 'GitHub'",
+    "description": "Офіційний мерч GitHub",
+    "price": 350,
+    "category": "clothing",
+    "img": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=300&fit=crop",
+    "isFavorite": false
+  },
+  {
+    "id": 12,
+    "name": "Шкарпетки 'Hello World'",
+    "description": "Набір з 3 пар кольорових шкарпеток",
+    "price": 280,
+    "category": "clothing",
+    "img": "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?w=400&h=300&fit=crop",
+    "isFavorite": false
+  }
+]
+
