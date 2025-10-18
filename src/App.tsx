@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { fetchUser } from '@/redux/slices/userSlice'
 import Header from '@/components/Header'
@@ -10,6 +11,10 @@ import AppRoutes from '@/routes/AppRoutes'
 function App() {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector((state) => state.user)
+  const location = useLocation()
+  
+  // Приховуємо Header і Footer на домашній сторінці
+  const isHomePage = location.pathname === '/'
 
   useEffect(() => {
     dispatch(fetchUser())
@@ -18,17 +23,19 @@ function App() {
   return (
     <div className="app">
       <ScrollToTop />
-      <Header />
-     <AppRoutes />
-      <Footer
-        contactInfo={user ? {
-          phone: user.phone,
-          email: user.email,
-          telegram: user.telegram,
-          linkedin: user.linkedin,
-          freelancehunt: user.freelancehunt
-        } : undefined}
-      />
+      {!isHomePage && <Header />}
+      <AppRoutes />
+      {!isHomePage && (
+        <Footer
+          contactInfo={user ? {
+            phone: user.phone,
+            email: user.email,
+            telegram: user.telegram,
+            linkedin: user.linkedin,
+            freelancehunt: user.freelancehunt
+          } : undefined}
+        />
+      )}
     </div>
   )
 }
