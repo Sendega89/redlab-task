@@ -101,7 +101,7 @@ describe('useAnimationVariants', () => {
         useAnimationVariants({ delayChildren: 0.5 })
       )
       
-      expect(result.current.containerVariants.visible.transition.delayChildren).toBe(0.5)
+      expect((result.current.containerVariants.visible as any).transition.delayChildren).toBe(0.5)
     })
 
     it('should use custom staggerChildren', () => {
@@ -109,7 +109,7 @@ describe('useAnimationVariants', () => {
         useAnimationVariants({ staggerChildren: 0.3 })
       )
       
-      expect(result.current.containerVariants.visible.transition.staggerChildren).toBe(0.3)
+      expect((result.current.containerVariants.visible as any).transition.staggerChildren).toBe(0.3)
     })
 
     it('should use custom itemY', () => {
@@ -117,7 +117,7 @@ describe('useAnimationVariants', () => {
         useAnimationVariants({ itemY: 50 })
       )
       
-      expect(result.current.itemVariants.hidden.y).toBe(50)
+      expect((result.current.itemVariants.hidden as any).y).toBe(50)
     })
 
     it('should use custom damping', () => {
@@ -125,7 +125,7 @@ describe('useAnimationVariants', () => {
         useAnimationVariants({ damping: 20 })
       )
       
-      expect(result.current.itemVariants.visible.transition.damping).toBe(20)
+      expect((result.current.itemVariants.visible as any).transition.damping).toBe(20)
     })
 
     it('should use custom stiffness', () => {
@@ -133,7 +133,7 @@ describe('useAnimationVariants', () => {
         useAnimationVariants({ stiffness: 200 })
       )
       
-      expect(result.current.itemVariants.visible.transition.stiffness).toBe(200)
+      expect((result.current.itemVariants.visible as any).transition.stiffness).toBe(200)
     })
 
     it('should accept multiple custom config values', () => {
@@ -147,11 +147,11 @@ describe('useAnimationVariants', () => {
       
       const { result } = renderHook(() => useAnimationVariants(config))
       
-      expect(result.current.containerVariants.visible.transition.delayChildren).toBe(0.4)
-      expect(result.current.containerVariants.visible.transition.staggerChildren).toBe(0.25)
-      expect(result.current.itemVariants.hidden.y).toBe(60)
-      expect(result.current.itemVariants.visible.transition.damping).toBe(18)
-      expect(result.current.itemVariants.visible.transition.stiffness).toBe(150)
+      expect((result.current.containerVariants.visible as any).transition.delayChildren).toBe(0.4)
+      expect((result.current.containerVariants.visible as any).transition.staggerChildren).toBe(0.25)
+      expect((result.current.itemVariants.hidden as any).y).toBe(60)
+      expect((result.current.itemVariants.visible as any).transition.damping).toBe(18)
+      expect((result.current.itemVariants.visible as any).transition.stiffness).toBe(150)
     })
   })
 
@@ -201,8 +201,8 @@ describe('useAnimationVariants', () => {
       
       const { result } = renderHook(() => useAnimationVariants(config))
       
-      expect(result.current.containerVariants.visible.transition.delayChildren).toBe(0)
-      expect(result.current.itemVariants.hidden.y).toBe(0)
+      expect((result.current.containerVariants.visible as any).transition.delayChildren).toBe(0)
+      expect((result.current.itemVariants.hidden as any).y).toBe(0)
     })
 
     it('should handle negative itemY value', () => {
@@ -210,7 +210,7 @@ describe('useAnimationVariants', () => {
         useAnimationVariants({ itemY: -50 })
       )
       
-      expect(result.current.itemVariants.hidden.y).toBe(-50)
+      expect((result.current.itemVariants.hidden as any).y).toBe(-50)
     })
 
     it('should handle very large values', () => {
@@ -224,8 +224,8 @@ describe('useAnimationVariants', () => {
       
       const { result } = renderHook(() => useAnimationVariants(config))
       
-      expect(result.current.containerVariants.visible.transition.delayChildren).toBe(10)
-      expect(result.current.itemVariants.hidden.y).toBe(1000)
+      expect((result.current.containerVariants.visible as any).transition.delayChildren).toBe(10)
+      expect((result.current.itemVariants.hidden as any).y).toBe(1000)
     })
   })
 
@@ -242,10 +242,10 @@ describe('useAnimationVariants', () => {
         useAnimationVariants({ delayChildren: 0.5, itemY: 40 })
       )
       
-      expect(result.current.containerVariants.visible.transition.delayChildren).toBe(0.5)
-      expect(result.current.itemVariants.hidden.y).toBe(40)
+      expect((result.current.containerVariants.visible as any).transition.delayChildren).toBe(0.5)
+      expect((result.current.itemVariants.hidden as any).y).toBe(40)
       // Should use defaults for non-specified values
-      expect(result.current.containerVariants.visible.transition.staggerChildren).toBe(0.15)
+      expect((result.current.containerVariants.visible as any).transition.staggerChildren).toBe(0.15)
     })
   })
 })
